@@ -7,6 +7,7 @@ import AirTile from "../tile/airtile.js";
 import FloorTile1 from "../tile/floortile1.js";
 import FloorTile2 from "../tile/floortile2.js";
 import UI from "../ui/ui.js";
+import Chest from "../entity/chest.js";
 
 class Level{
 

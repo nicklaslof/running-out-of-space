@@ -1,5 +1,6 @@
 import Animation from "./animation.js";
 import BulletPickup from "./bulletpickup.js";
+import Chest from "./chest.js";
 import CollisionEntity from "./collisionentity.js";
 import Explosion from "./explosion.js";
 import Particle from "./particle.js";
@@ -48,6 +49,10 @@ class Enemy extends CollisionEntity{
             console.log("dropping bullet");
             game.level.addEntity(new BulletPickup(this.position.x, this.position.y+this.getRandom(-25,25), {x: this.getRandom(-2,2),y: -1}).setSourceEntity(this));
             
+        }
+
+        if (this.getRandom(0,1) < 0.3){
+            game.level.addEntity(new Chest(this.position.x, this.position.y+this.getRandom(-25,25), {x: this.getRandom(-2,2),y: -1}).setHealth(12));
         }
         game.playExplosion();
     }
