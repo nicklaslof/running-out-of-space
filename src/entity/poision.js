@@ -6,7 +6,7 @@ class Poision extends CollisionEntity{
         this.setCustomCollisionSize(200,200);
         this.hasLight = hasLight;
         this.lightSize = 250;
-        this.lightColor = 0xff00ff00;
+        this.lightColor = 0xffff66fe;
         this.lightOffsetX = 8;
         this.hitTimeout = 0.2;
     }
@@ -20,7 +20,7 @@ class Poision extends CollisionEntity{
     }
     collidedWith(game, otherEntity){
         if (otherEntity.type == "p"){
-            otherEntity.hit(game,1);
+            otherEntity.hit(game,1,{x:Math.random(-1,1), y: Math.random(-1,1)});
         }
     }
     

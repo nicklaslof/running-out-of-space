@@ -6,10 +6,13 @@ import Tile from "../tile/tile.js";
 import AirTile from "../tile/airtile.js";
 import FloorTile1 from "../tile/floortile1.js";
 import FloorTile2 from "../tile/floortile2.js";
+import UI from "../ui/ui.js";
 
 class Level{
 
     constructor() {
+        this.ui = new UI();
+
         this.entities = [];
         this.lights = [];
         this.tiles = [];
@@ -51,7 +54,7 @@ class Level{
     tick(game, deltaTime){
 
        
-
+        this.ui.tick(game,deltaTime);
 
         this.entities.forEach(e => {
             e.tick(game, deltaTime);
@@ -73,6 +76,8 @@ class Level{
         this.entities.forEach(entity => {
             entity.render(game);
         });
+
+        this.ui.render(game);
   
     }
 
@@ -136,7 +141,7 @@ class Level{
     spawnEnemy(){
         var x = this.getRandom(0,1) < 0.5 ? -20:W+20;
         var y = this.getRandom(0,H);
-        this.entities.push(new Enemy(x,y).setHealth(10));
+        this.entities.push(new Enemy(x,y).setHealth(Math.floor(this.getRandom(5,8))));
     }
 
     spawnWorm(){

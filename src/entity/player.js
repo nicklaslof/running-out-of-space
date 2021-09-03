@@ -13,6 +13,8 @@ class Player extends CollisionEntity{
         this.lightSize = 300;
         this.lightOffsetX = 30;
         this.lightOffsetY = 8;
+        this.bullets = 300;
+        this.hasKnockback = true;
 
         this.animation = new Animation();
         this.animation.addState("idle",0,0,10,10,0.2).addState("idle",10,0,10,10,0.2);
@@ -25,6 +27,7 @@ class Player extends CollisionEntity{
 
     tick(game, deltaTime){
 
+        if (this.bullets < 0) this.bullets = 0;
         this.movement.x = game.input.axes.x;
         this.movement.y = game.input.axes.y;
 
@@ -50,9 +53,10 @@ class Player extends CollisionEntity{
         }
 
         if (this.weaponDelay >0) this.weaponDelay -= deltaTime;
-        if (this.weaponDelay <=0 && game.input.firePressed){
+        if (this.bullets>0 && this.weaponDelay <=0 && game.input.firePressed){
             var dir = this.horizontalFlip ? {x:-1,y:0} : {x:1,y:0};
             game.level.addEntity(new Bullet(this.position.x + (dir.x*50), this.position.y,dir,2).setSourceEntity(this));
+            this.bullets--;
             this.weaponDelay = 0.1;
             game.playShoot();
         }

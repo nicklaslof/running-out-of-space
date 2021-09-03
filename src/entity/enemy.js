@@ -1,6 +1,7 @@
 import Animation from "./animation.js";
 import BulletPickup from "./bulletpickup.js";
 import CollisionEntity from "./collisionentity.js";
+import Explosion from "./explosion.js";
 
 class Enemy extends CollisionEntity{
 
@@ -37,6 +38,11 @@ class Enemy extends CollisionEntity{
 
         super.tick(game,deltaTime);
         
+    }
+
+    onDispose(game){
+        game.level.addEntity(new Explosion(this.position.x, this.position.y));
+        game.playExplosion();
     }
 
     collidedWith(game, otherEntity){

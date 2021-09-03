@@ -1,11 +1,12 @@
 import Animation from "./animation.js";
 import CollisionEntity from "./collisionentity.js";
 import Poision from "./poision.js";
+import Explosion from "./explosion.js";
 
 class Worm extends CollisionEntity{
     constructor(posX, posY) {
         super(posX,posY,0,10,12,18,0xffffffff,32,24,"wo");
-        this.speed = 40;
+        this.speed = 70;
         this.movement = {x:0,y:0};
         this.hasLight = true;
         this.lightSize = 200;
@@ -50,6 +51,9 @@ class Worm extends CollisionEntity{
                 game.level.addEntity(new Poision(this.position.x+(x*32),this.position.y+(y*32),light)); 
             }   
         }
+        game.level.addEntity(new Explosion(this.position.x, this.position.y));
+        game.playExplosion();
+
        
     }
 

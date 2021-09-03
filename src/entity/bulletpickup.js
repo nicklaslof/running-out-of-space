@@ -44,6 +44,7 @@ class BulletPickup extends CollisionEntity{
         if (otherEntity.type == "p"){
             this.disposed = true;
             game.playPickup();
+            otherEntity.bullets++;
         }
 
         super.collidedWith(game,otherEntity);

@@ -24,9 +24,6 @@ echo "</script>" >> index-template.html
 echo "<script>" >> index-template.html
 cat ../src/c.js >> index-template.html
 echo "</script>" >> index-template.html
-echo "<script>" >> index-template.html
-cat ../src/l.js >> index-template.html
-echo "</script>" >> index-template.html
 echo "<script charset=\"utf8\">" >> index-template.html
 cat o.js >> index-template.html
 #echo "<script charset=\"utf8\">" >> index-template.html

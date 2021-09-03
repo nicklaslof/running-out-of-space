@@ -1,5 +1,6 @@
 import Light from "../light/light.js";
 
+
 class Entity{
     constructor(posX, posY, texX,texY,texW,texH,c,sizeX, sizeY, type) {
         this.position = {x:posX, y:posY, z:0};
@@ -106,7 +107,6 @@ class Entity{
     }
 
     onDispose(game){
-
     }
 
     setHealth(h){
@@ -116,6 +116,10 @@ class Entity{
 
     onHit(game,h,direction){
         
+    }
+
+    doesCollide(otherEntity){
+        return false;
     }
 
 
