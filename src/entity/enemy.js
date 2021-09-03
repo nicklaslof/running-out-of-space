@@ -2,6 +2,7 @@ import Animation from "./animation.js";
 import BulletPickup from "./bulletpickup.js";
 import CollisionEntity from "./collisionentity.js";
 import Explosion from "./explosion.js";
+import Particle from "./particle.js";
 
 class Enemy extends CollisionEntity{
 
@@ -23,6 +24,7 @@ class Enemy extends CollisionEntity{
         this.animationState = "walk";
 
         this.hasKnockback = true;
+        this.bulletsPickedup = 0;
 
     }
 
@@ -42,14 +44,24 @@ class Enemy extends CollisionEntity{
 
     onDispose(game){
         game.level.addEntity(new Explosion(this.position.x, this.position.y));
+        for (let i = 0; i < this.bulletsPickedup; i++) {
+            console.log("dropping bullet");
+            game.level.addEntity(new BulletPickup(this.position.x, this.position.y+this.getRandom(-25,25), {x: this.getRandom(-2,2),y: -1}).setSourceEntity(this));
+            
+        }
         game.playExplosion();
+    }
+
+    pickupBullet(){
+        this.bulletsPickedup++;
     }
 
     collidedWith(game, otherEntity){
         if (otherEntity.type == "b" && otherEntity.sourceEntity != this){
             this.hit(game,1,otherEntity.direction);
             otherEntity.disposed = true;
-            game.level.addEntity(new BulletPickup(this.position.x, this.position.y+this.getRandom(-25,25), {x: this.getRandom(-2,2),y: -1}));
+            game.level.addEntity(new BulletPickup(this.position.x, this.position.y+this.getRandom(-25,25), {x: this.getRandom(-2,2),y: -1}).setSourceEntity(this));
+            game.level.addEntity(new Particle(this.position.x, this.position.y+this.getRandom(-25,25), {x: this.getRandom(-2,2),y: -1},0xffffffff));
             game.playHit();
         }
 

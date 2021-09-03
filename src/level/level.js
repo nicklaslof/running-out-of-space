@@ -38,6 +38,7 @@ class Level{
         }
 
         this.spawnEnemy();
+        this.spawnWorm();
         setInterval(()=>{this.spawnEnemy();},6000);
         setInterval(()=>{this.spawnWorm();},12000);
         setInterval(()=>{

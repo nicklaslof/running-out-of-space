@@ -9,6 +9,7 @@ class BulletPickup extends CollisionEntity{
         this.done = false;
         this.angle = 0;
         this.angleSpeed = this.getRandom(1,4);
+        this.sourceEntity = null;
 
     }
 
@@ -40,11 +41,21 @@ class BulletPickup extends CollisionEntity{
 
     }
 
+    setSourceEntity(e){
+        this.sourceEntity = e;
+        return this;
+    }
+
     collidedWith(game, otherEntity){
         if (otherEntity.type == "p"){
             this.disposed = true;
             game.playPickup();
             otherEntity.bullets++;
+        }
+
+        if (otherEntity.type == "e" && this.sourceEntity != otherEntity){
+            otherEntity.pickupBullet();
+            this.disposed = true;
         }
 
         super.collidedWith(game,otherEntity);

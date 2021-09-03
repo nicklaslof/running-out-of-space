@@ -1,4 +1,5 @@
 import CollisionEntity from "./collisionentity.js";
+import Particle from "./particle.js";
 
 class Poision extends CollisionEntity{
     constructor(posX, posY,hasLight) {
@@ -13,6 +14,7 @@ class Poision extends CollisionEntity{
 
     tick(game, deltaTime){
         super.tick(game,deltaTime);
+        if (this.getRandom(0,100)<1) game.level.addEntity(new Particle(this.position.x+this.getRandom(-25,25), this.position.y+this.getRandom(-25,25), {x: this.getRandom(-28,29),y: 1},0xffff66fe,2,false,4));
     }
 
     render(game){

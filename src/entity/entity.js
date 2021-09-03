@@ -5,10 +5,7 @@ class Entity{
     constructor(posX, posY, texX,texY,texW,texH,c,sizeX, sizeY, type) {
         this.position = {x:posX, y:posY, z:0};
         this.tilePosition = {x:0, y:0}; // Collision entities belongs to tiles to speedup collision detection
-        this.u0 = texX/TZ;              // WebGL UVs of the texture
-        this.u1 = texY/TZ;              // WebGL UVs of the texture
-        this.v0 = this.u0 + (texW/TZ);  // WebGL UVs of the texture
-        this.v1 = this.u1 + (texH/TZ);  // WebGL UVs of the texture
+        this.setupUV(texX,texY,texW,texH);
         this.c = c;                     // The tint color of the entity. Shortened as c because color is a reserved word so it stays when minifying
         this.sizeX = sizeX;             // Width
         this.sizeY = sizeY;             // Height
@@ -29,6 +26,13 @@ class Entity{
         this.lightOffsetY = 0;
         this.hitTimeout = 0;
         this.hasKnockback = false;
+    }
+
+    setupUV(texX,texY,texW,texH){
+        this.u0 = texX/TZ;              // WebGL UVs of the texture
+        this.u1 = texY/TZ;              // WebGL UVs of the texture
+        this.v0 = this.u0 + (texW/TZ);  // WebGL UVs of the texture
+        this.v1 = this.u1 + (texH/TZ);  // WebGL UVs of the texture
     }
 
     tick(game, deltaTime){

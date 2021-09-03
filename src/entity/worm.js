@@ -2,6 +2,8 @@ import Animation from "./animation.js";
 import CollisionEntity from "./collisionentity.js";
 import Poision from "./poision.js";
 import Explosion from "./explosion.js";
+import Particle from "./particle.js";
+import BulletPickup from "./bulletpickup.js";
 
 class Worm extends CollisionEntity{
     constructor(posX, posY) {
@@ -37,6 +39,8 @@ class Worm extends CollisionEntity{
         if (otherEntity.type == "b" && otherEntity.sourceEntity != this){
             this.hit(game,1,otherEntity.direction);
             otherEntity.disposed = true;
+            game.level.addEntity(new BulletPickup(this.position.x, this.position.y+this.getRandom(-25,25), {x: this.getRandom(-2,2),y: -1}).setSourceEntity(this));
+            game.level.addEntity(new Particle(this.position.x, this.position.y+this.getRandom(-25,25), {x: this.getRandom(-2,2),y: -1}));
             game.playHit();
         }
 
