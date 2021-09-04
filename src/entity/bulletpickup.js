@@ -59,7 +59,12 @@ class BulletPickup extends CollisionEntity{
                 game.playPickup();
                 otherEntity.weaponPower++;
             }
+        }
 
+        if (otherEntity.type == "bc" && this.type == "bp"){
+            game.playPickup();
+            otherEntity.pickupBullet();
+            this.disposed = true;
         }
 
         if (otherEntity.type == "e" && this.sourceEntity != otherEntity){

@@ -134,6 +134,9 @@ class Entity{
     let y = v1.y - v2.y;
     return Math.hypot(x, y);
 }
+distanceToOtherEntity(entity){
+    return this.distance(this.position, entity.position);
+}
 
 
 
