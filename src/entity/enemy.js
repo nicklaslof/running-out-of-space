@@ -32,12 +32,15 @@ class Enemy extends CollisionEntity{
     tick(game,deltaTime){
  
         // Move against the player
-        let playerPos = {x:game.level.player.position.x, y:game.level.player.position.y};
-        let dist = this.distance(this.position, playerPos);
-        let velocity = {x:playerPos.x - this.position.x, y: playerPos.y - this.position.y};
-        this.normalize(velocity);
-        
-        this.translate(velocity.x*this.speed*deltaTime,velocity.y*this.speed*deltaTime);
+        if (!game.showIntro){
+            let playerPos = {x:game.level.player.position.x, y:game.level.player.position.y};
+            let dist = this.distance(this.position, playerPos);
+            let velocity = {x:playerPos.x - this.position.x, y: playerPos.y - this.position.y};
+            this.normalize(velocity);
+            
+            this.translate(velocity.x*this.speed*deltaTime,velocity.y*this.speed*deltaTime);
+        }
+
 
         super.tick(game,deltaTime);
         

@@ -11,7 +11,7 @@ class CollisionEntity extends Entity{
 
     tick(game, deltaTime){
         super.tick(game,deltaTime);
-
+  
         // Calculate the current tile for the entity. If it has changed move the entity to that tile instead.
         // The reason for this is to optimize the collision code so only object inside it's own tile are checked against eachother.
         // Not perfect for bigger objects like the solidlaser that is split into multiple entities becuase of this.

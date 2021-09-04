@@ -19,6 +19,7 @@ class Heart extends CollisionEntity{
 
     tick(game, deltaTime){
         super.tick(game,deltaTime);
+        if (game.showIntro) return;
         if (!this.done){
             this.angle += deltaTime * this.angleSpeed;
             var sin = Math.sin(this.angle*10);

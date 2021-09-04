@@ -6,8 +6,8 @@ import Explosion from "./explosion.js";
 import Particle from "./particle.js";
 
 class Bomb extends CollisionEntity{
-    constructor(posX,posY, direction) {
-        super(posX,posY,49,20,7,8,0xffffffff,38,42,"bo");
+    constructor(posX,posY, direction,sizeX=38,sizeY=42) {
+        super(posX,posY,49,20,7,8,0xffffffff,sizeX,sizeY,"bo");
         this.position.z = -1;
         this.direction = direction;
         this.speed = 5;
@@ -24,7 +24,7 @@ class Bomb extends CollisionEntity{
 
     tick(game, deltaTime){
         super.tick(game,deltaTime);
-       
+        if (game.showIntro) return;
         if (!this.done){
             this.angle += deltaTime * this.angleSpeed;
             var sin = Math.sin(this.angle*10);

@@ -3,6 +3,7 @@ import GlTexture from "./graphic/gltexture.js";
 import Level from './level/level.js';
 import Input from './input/input.js';
 import Texture from './graphic/texture.js';
+import Intro from './ui/intro.js';
 class Game{
     constructor(){
         var canvas = document.getElementById("g");
@@ -32,6 +33,9 @@ class Game{
 
         this.pickupSoundDelay = 0;
 
+        this.intro = new Intro();
+        this.showIntro = true;
+
         
     }
 
@@ -47,6 +51,18 @@ class Game{
         this.last = now;
         if (this.pickupSoundDelay >0)this.pickupSoundDelay -= (deltaTime/1000);
         this.input.tick(this,deltaTime/1000);
+
+
+        if (this.showIntro){
+            this.gl.bkg(0.5,0.3,0.6,1);
+            this.gl.cls();
+            this.intro.tick(this, deltaTime/1000);
+            this.intro.render(this);
+            this.gl.flush();
+            return;
+        }
+
+
         this.level.tick(this,deltaTime/1000);
 
         // Set blend mode and render the level
