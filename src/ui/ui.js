@@ -16,6 +16,8 @@ class UI{
         this.drawTextAt("Health: "+game.level.player.health,20,20,"white",18);
 
         this.drawTextAt("Bullets: "+game.level.player.bullets,170,20,"white",18);
+
+        this.drawTextAt("Weapon power: "+game.level.player.weaponPower,336,20,"white",18);
     }
 
     drawTextAt(text,x,y,col, fontSize=16){

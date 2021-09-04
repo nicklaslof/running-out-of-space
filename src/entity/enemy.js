@@ -39,7 +39,7 @@ class Enemy extends CollisionEntity{
             this.translate(direction.x*this.speed*deltaTime,direction.y*this.speed*deltaTime);
 
             if(this.getRandom(0,200)<1){
-                game.level.addEntity(new Bullet(this.position.x,this.position.y,direction,2,40,14,3,3,400,20).setSourceEntity(this));
+                game.level.addEntity(new Bullet(this.position.x,this.position.y,direction,2,1,40,14,3,3,400,20).setSourceEntity(this));
             }
 
         }
@@ -69,7 +69,7 @@ class Enemy extends CollisionEntity{
 
     collidedWith(game, otherEntity){
         if (otherEntity.type == "b" && otherEntity.sourceEntity != this && otherEntity.sourceEntity.type != this.type && otherEntity.sourceEntity.type != "wo"){
-            this.hit(game,1,otherEntity.direction);
+            this.hit(game,otherEntity.power,otherEntity.direction);
             otherEntity.disposed = true;
             game.level.addEntity(new BulletPickup(this.position.x, this.position.y+this.getRandom(-25,25), {x: this.getRandom(-2,2),y: -1}).setSourceEntity(this));
             game.level.addEntity(new Particle(this.position.x, this.position.y+this.getRandom(-25,25), {x: this.getRandom(-2,2),y: -1},0xffffffff));

@@ -1,8 +1,8 @@
 import CollisionEntity from "./collisionentity.js";
 
 class BulletPickup extends CollisionEntity{
-    constructor(posX, posY, direction) {
-        super(posX,posY,53,13,7,4,0xffffffff,15,8,"bp");
+    constructor(posX, posY, direction,texX=53,texY=13,texW=7,texH=4) {
+        super(posX,posY,texX,texY,texW,texH,0xffffffff,15,8,"bp");
         this.direction = direction;
         this.speed = 5;
         this.y = posY;
@@ -21,7 +21,9 @@ class BulletPickup extends CollisionEntity{
             this.angle += deltaTime * this.angleSpeed;
             var sin = Math.sin(this.angle*10);
     
-            this.translate(this.direction.x,-sin*this.speed);
+            //this.translate(this.direction.x,-sin*this.speed);
+            this.position.x += this.direction.x;
+            this.position.y += -sin*this.speed;
 
             if (this.angle > 0.61){
                 this.done = true;
@@ -50,8 +52,14 @@ class BulletPickup extends CollisionEntity{
     collidedWith(game, otherEntity){
         if (otherEntity.type == "p"){
             this.disposed = true;
-            game.playPickup();
-            otherEntity.bullets++;
+            if (this.type == "bp"){
+                game.playPickup();
+                otherEntity.bullets++;
+            }else if (this.type == "wsp"){
+                game.playPickup();
+                otherEntity.weaponPower++;
+            }
+
         }
 
         if (otherEntity.type == "e" && this.sourceEntity != otherEntity){

@@ -1,7 +1,7 @@
 import CollisionEntity from "./collisionentity.js";
 
 class Bullet extends CollisionEntity{
-    constructor(posX, posY, direction, ttl,texX=28,texY=14,texW=6,texH=3,speed=800,lightSize=60) {
+    constructor(posX, posY, direction, ttl,power, texX=28,texY=14,texW=6,texH=3,speed=800,lightSize=60) {
         super(posX,posY,texX,texY,texW,texH,0xffffffff,15,8,"b");
         this.direction = direction;
         this.speed = speed;
@@ -10,6 +10,7 @@ class Bullet extends CollisionEntity{
         this.lightColor = 0xff00ffff;
         this.lightSize = lightSize;
         this.sourceEntity = null;
+        this.power = power;
         this.setCustomCollisionSize(100,100);
     }
 
