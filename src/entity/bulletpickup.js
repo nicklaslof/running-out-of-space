@@ -15,6 +15,7 @@ class BulletPickup extends CollisionEntity{
 
     tick(game, deltaTime){
         super.tick(game,deltaTime);
+        if (game.showIntro) return;
         if (this.pickupSoundDelay>0) this.pickupSoundDelay -= deltaTime;
         if (!this.done){
             this.angle += deltaTime * this.angleSpeed;
