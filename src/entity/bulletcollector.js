@@ -3,6 +3,7 @@ class BulletCollector extends CollisionEntity{
 
     constructor(posX,posY){
         super(posX,posY,88,16,9,9,0xffffffff,16,16,"bc");
+        this.position.z = -1;
         this.dist = 20;
         this.angle = 0;
         this.rotationSpeed = 10;
@@ -11,10 +12,11 @@ class BulletCollector extends CollisionEntity{
         this.lightColor = 0xffe5d742;
         this.lightSize = 100;
         this.bulletsPickedUp = 0;
+        this.givePlayerTimeout = 0;
     }
 
     tick(game,deltaTime){
-
+        this.givePlayerTimeout -= deltaTime;
         this.angle += deltaTime;
 
         var bullets = game.level.entities.filter((e)=>{
@@ -45,6 +47,13 @@ class BulletCollector extends CollisionEntity{
 
         this.position.x = x;
         this.position.y = y;
+
+        if (this.bulletsPickedUp > 0 && this.givePlayerTimeout <=0){
+            this.bulletsPickedUp--;
+            game.level.player.bullets++;
+            game.playPickupFromCollector();
+            this.givePlayerTimeout = 0.075;
+        }
     }
 
     pickup(game,deltaTime,bullets){

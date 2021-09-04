@@ -153,5 +153,9 @@ class Game{
         zzfx(20000,...[1.03,,173,,.01,.12,,1.63,,,657,.05,,,,,,.69,.01,.19]); // Pickup 969
     }
 
+    playPickupFromCollector(){
+        zzfx(20000,...[.4,0,103,,.01,.02,1,.42,,,,,,,,,,.6,.08]); // Pickup 979
+    }
+
 }
 export default Game;
