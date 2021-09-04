@@ -105,8 +105,9 @@ class Entity{
             var dirY = direction.y*8;
             if (dirX + this.position.x < 0 || dirX + this.position.x > W) dirX = 0;
             if (dirY + this.position.y < 0 || dirY + this.position.y > W) dirY = 0;
-
-            this.translate(dirX, dirY);
+            this.position.x += dirX;
+            this.position.y += dirY;
+            //this.translate(dirX, dirY);
         }
     }
 
@@ -151,6 +152,7 @@ getRandom(min, max){
         }
         v.x *= len;
         v.y *= len;
+        return v;
     }
 }
 

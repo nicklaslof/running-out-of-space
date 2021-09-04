@@ -70,6 +70,13 @@ class Player extends CollisionEntity{
         game.level.addEntity(new Particle(this.position.x, this.position.y+this.getRandom(-25,25), {x: this.getRandom(-2,2),y: -1},0xff0000ff));
     }
 
+    collidedWith(game, otherEntity){
+        if (otherEntity.type == "b" && otherEntity.setSourceEntity != this){
+            this.hit(game,1,otherEntity.direction);
+            otherEntity.disposed = true;
+        } 
+    }
+
   
     render(game, deltaTime){
         if (!game.input.firePressed){
@@ -79,8 +86,6 @@ class Player extends CollisionEntity{
             super.render(game, deltaTime);
             this.weapon.render(game);
         }
-
-        
     }
 }
 

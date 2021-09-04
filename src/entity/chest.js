@@ -51,7 +51,7 @@ class Chest extends CollisionEntity{
 
 
     collidedWith(game, otherEntity){
-        if (otherEntity.type == "b"){
+        if (otherEntity.type == "b" && otherEntity.sourceEntity.type != "e" && otherEntity.sourceEntity.type != "wo"){
             this.hit(game,1,otherEntity.direction);
             otherEntity.disposed = true;
             game.level.addEntity(new BulletPickup(this.position.x, this.position.y+this.getRandom(-25,25), {x: this.getRandom(-2,2),y: -1}).setSourceEntity(this));
