@@ -12,8 +12,8 @@ class Player extends CollisionEntity{
         this.speed = 230;
         this.movement = {x:0,y:0};
         this.hasLight = true;
-        this.lightSize = 300;
-        this.lightOffsetX = 30;
+        this.lightSize = 100;
+        this.lightOffsetX = 8;
         this.lightOffsetY = 8;
         this.bullets = 300;
         this.hasKnockback = true;

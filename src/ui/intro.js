@@ -1,8 +1,10 @@
 import Bomb from "../entity/bomb.js";
+import BulletCollector from "../entity/bulletcollector.js";
 import BulletPickup from "../entity/bulletpickup.js";
 import Chest from "../entity/chest.js";
 import Enemy from "../entity/enemy.js";
 import Heart from "../entity/heart.js";
+import WeaponStrengthPickup from "../entity/weaponstrengthpickup.js";
 import Worm from "../entity/worm.js";
 import Level from "../level/level.js";
 import Arrow from "./arrow.js";
@@ -28,6 +30,8 @@ class Intro extends UI{
 
         this.entites.push(new BulletPickup(556, this.introInstructionsY+44));
         this.entites.push(new Heart(620, this.introInstructionsY+44));
+        this.entites.push(new WeaponStrengthPickup(680, this.introInstructionsY+44));
+        this.entites.push(new BulletCollector(736, this.introInstructionsY+44));
 
         this.entites.push(new Bomb(556, this.introInstructionsY+88,null,24,32));
         this.entites.push(new Chest(620, this.introInstructionsY+90));
@@ -59,8 +63,9 @@ class Intro extends UI{
 
 
         this.drawTextAt("Don't run out of space!" ,240,60 ,"white",36);
-        this.drawTextAt("A game for JS13k 2021 by Nicklas Löf" ,270,120 ,"white",20);
-        this.drawTextAt("Graphics by orangepascal from http://orangepixel.net" ,180,180 ,"white",20);
+        this.drawTextAt("A game for JS13k 2021 by Nicklas Löf" ,270,100 ,"white",20);
+        this.drawTextAt("Graphics by Orangepascal from http://orangepixel.net" ,180,150 ,"white",20);
+        this.drawTextAt("and additonal graphics by Nicklas Löf" ,264,180 ,"white",20);
 
         this.drawTextAt("WASD and SPACE or use a gamepad" ,320,this.introInstructionsY-50 ,"white",18);
 

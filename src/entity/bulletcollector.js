@@ -2,7 +2,7 @@ import CollisionEntity from "./collisionentity.js";
 class BulletCollector extends CollisionEntity{
 
     constructor(posX,posY){
-        super(posX,posY,88,16,9,9,0xffffffff,16,16,"bc");
+        super(posX,posY,88,16,10,10,0xffffffff,24,24,"bc");
         this.position.z = -1;
         this.dist = 20;
         this.angle = 0;
@@ -11,14 +11,17 @@ class BulletCollector extends CollisionEntity{
         this.hasLight = true;
         this.lightColor = 0xffe5d742;
         this.lightSize = 100;
+        this.lightOffsetX = 6;
         this.bulletsPickedUp = 0;
         this.givePlayerTimeout = 0;
     }
 
     tick(game,deltaTime){
+
         this.givePlayerTimeout -= deltaTime;
         this.angle += deltaTime;
-
+        this.rotation = this.angle;
+        if (game.showIntro) return;
         var bullets = game.level.entities.filter((e)=>{
             return e.type == "bp";
         });
@@ -48,9 +51,11 @@ class BulletCollector extends CollisionEntity{
         this.position.x = x;
         this.position.y = y;
 
-        if (this.bulletsPickedUp > 0 && this.givePlayerTimeout <=0){
-            this.bulletsPickedUp--;
-            game.level.player.bullets++;
+        var bulletsToTransfer = this.bulletsPickedUp > 2 ? 2 : 1;
+
+        if (this.bulletsPickedUp > 0 && bulletsToTransfer > 0 && this.givePlayerTimeout <=0){
+            this.bulletsPickedUp -=bulletsToTransfer;
+            game.level.player.bullets +=bulletsToTransfer;
             game.playPickupFromCollector();
             this.givePlayerTimeout = 0.075;
         }
