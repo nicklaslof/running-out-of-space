@@ -67,7 +67,7 @@ class Player extends CollisionEntity{
     }
     onHit(game,h,direction){
         game.playPlayerHit();
-        game.level.addEntity(new Particle(this.position.x, this.position.y+this.getRandom(-25,25), {x: this.getRandom(-2,2),y: -1}));
+        game.level.addEntity(new Particle(this.position.x, this.position.y+this.getRandom(-25,25), {x: this.getRandom(-2,2),y: -1},0xff0000ff));
     }
 
   

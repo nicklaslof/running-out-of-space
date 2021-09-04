@@ -1,8 +1,8 @@
 import Entity from "./entity.js";
 import Animation from "./animation.js";
 class Explosion extends Entity{
-    constructor(posX,posY) {
-        super(posX,posY,16,32,16,16,0xffffffff,64,64,"e");
+    constructor(posX,posY,size=64) {
+        super(posX,posY,16,32,16,16,0xffffffff,size,size,"exp");
         this.position.z = -1;
         this.ttl = 0.5;
        

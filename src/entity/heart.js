@@ -13,8 +13,8 @@ class Heart extends CollisionEntity{
 
         this.hasLight = true;
         this.lightColor = 0xff0000ff;
-        this.lightSize = 250;
-        this.lightOffsetX = 15;
+        this.lightSize = 40;
+        this.lightOffsetX = 4;
     }
 
     tick(game, deltaTime){
@@ -45,6 +45,7 @@ class Heart extends CollisionEntity{
     collidedWith(game, otherEntity){
         if (otherEntity.type == "p"){
             otherEntity.health++;
+            game.playPlayerHealth();
             this.disposed = true;
         }
         super.collidedWith(game,otherEntity);

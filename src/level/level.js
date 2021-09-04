@@ -8,6 +8,7 @@ import FloorTile1 from "../tile/floortile1.js";
 import FloorTile2 from "../tile/floortile2.js";
 import UI from "../ui/ui.js";
 import Chest from "../entity/chest.js";
+import Bomb from "../entity/bomb.js";
 
 class Level{
 
@@ -37,6 +38,8 @@ class Level{
         for (let index = 0; index < 1; index++) {
           
         }
+
+        this.addEntity(new Bomb(W/2,H/2,{x:0,y:0}).setHealth(5));
 
         this.spawnEnemy();
         this.spawnWorm();
@@ -70,7 +73,7 @@ class Level{
     }
 
     render(game){
-        game.gl.bkg(0.4,0.3,0.4,1);
+        game.gl.bkg(0.8,0.6,0.9,1);
         game.gl.cls();
         this.tiles.forEach(t => {
             t.render(game);
@@ -150,6 +153,17 @@ class Level{
         var x = this.getRandom(0,1) < 0.5 ? -20:W+20;
         var y = this.getRandom(0,H);
         this.entities.push(new Worm(x,y).setHealth(3));
+    }
+
+    explosion(game){
+        this.entities.forEach(e => {
+            if (e.type == "e" || e.type == "wo"){
+                e.hit(game,50,{x:0,y:0});
+                console.log("Hello?=");
+            }
+        });
+
+
     }
 
     // Used to generate random numbers in various places.
