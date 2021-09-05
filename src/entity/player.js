@@ -27,7 +27,9 @@ class Player extends CollisionEntity{
         this.weapon = new Weapon(0,0);
         this.weaponDelay = 0;
 
-        this.bulletCollector = new BulletCollector(this.position.x, this.position.y);
+        //this.bulletCollector = new BulletCollector(this.position.x, this.position.y);
+        this.bulletCollector = null;
+        this.hasBulletCollector = false;
     }
 
     tick(game, deltaTime){
@@ -38,6 +40,10 @@ class Player extends CollisionEntity{
 
         if (this.movement.x !=0 || this.movement.y !=0) this.animationState = "walk";
         else this.animationState = "idle";
+
+        if (this.hasBulletCollector && this.bulletCollector == null){
+            this.bulletCollector = new BulletCollector(this.position.x, this.position.y);
+        }
 
         this.normalize(this.movement);
         this.translate(this.movement.x * this.speed * deltaTime,this.movement.y * this.speed * deltaTime);

@@ -1,4 +1,5 @@
 import Bomb from "./bomb.js";
+import BulletCollectorPickup from "./bulletcollectorpickup.js";
 import BulletPickup from "./bulletpickup.js";
 import CollisionEntity from "./collisionentity.js";
 import Explosion from "./explosion.js";
@@ -55,7 +56,7 @@ class Chest extends CollisionEntity{
             game.level.addEntity(new Heart(this.position.x, this.position.y+this.getRandom(-55,55), {x: this.getRandom(-5,5),y: -1}));
         }
 
-        
+        if (!game.level.player.hasBulletCollector && this.getRandom(0,1) < 1) game.level.addEntity(new BulletCollectorPickup(this.position.x, this.position.y+this.getRandom(-25,25),{x: this.getRandom(-5,5),y: -1}));
         if (this.getRandom(0,1) < 0.25) game.level.addEntity(new Bomb(this.position.x, this.position.y+this.getRandom(-25,25),{x: this.getRandom(-5,5),y: -1}).setHealth(5));
         if (this.getRandom(0,1) < 0.25) game.level.addEntity(new WeaponStrengthPickup(this.position.x, this.position.y+this.getRandom(-25,25),{x: this.getRandom(-5,5),y: -1}));
         game.playExplosion();

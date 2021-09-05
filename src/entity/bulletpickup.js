@@ -11,6 +11,9 @@ class BulletPickup extends CollisionEntity{
         this.angleSpeed = this.getRandom(1,4);
         this.sourceEntity = null;
         this.noHorizontalFlip = true;
+        this.hasLight = true;
+        this.lightSize = 10;
+        this.lightColor = 0xff00ffff;
 
     }
 
@@ -61,6 +64,10 @@ class BulletPickup extends CollisionEntity{
                 game.playPickup();
                 otherEntity.weaponPower++;
                 game.level.ui.addTextParticle(this.position.x-20,this.position.y,"Weapon power +1",{x:this.getRandom(-1,1),y:this.getRandom(-1,-5)},"yellow",18);
+            }else if (this.type == "bcp"){
+                game.playPickup();
+                game.level.ui.addTextParticle(this.position.x-35,this.position.y,"Bullet Collector found!",{x:this.getRandom(-1,1),y:this.getRandom(-1,-5)},"green",18);
+                otherEntity.hasBulletCollector = true;
             }
         }
 
