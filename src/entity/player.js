@@ -78,13 +78,13 @@ class Player extends CollisionEntity{
     onHit(game,h,direction){
         game.playPlayerHit();
         game.level.addEntity(new Particle(this.position.x, this.position.y+this.getRandom(-25,25), {x: this.getRandom(-2,2),y: -1},0xff0000ff));
-        game.level.ui.addTextParticle(this.position.x-20,this.position.y,"Health -1",{x:this.getRandom(-1,1),y:this.getRandom(-1,-5)},"red",14);
+        game.level.ui.addTextParticle(this.position.x-20,this.position.y,"-1 \u2665",{x:this.getRandom(-1,1),y:this.getRandom(-1,-5)},"red",14);
     }
 
     collidedWith(game, otherEntity){
-        if (otherEntity.type == "b" && otherEntity.setSourceEntity != this){
+        if (otherEntity.type == "b" || otherEntity.type == "e" || otherEntity.type == "wo" && otherEntity.setSourceEntity != this){
             this.hit(game,1,otherEntity.direction);
-            otherEntity.disposed = true;
+            if (otherEntity.type == "b") otherEntity.disposed = true;
         } 
     }
 
