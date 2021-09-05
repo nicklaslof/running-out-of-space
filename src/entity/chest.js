@@ -16,11 +16,13 @@ class Chest extends CollisionEntity{
         this.done = false;
         this.angle = 0;
         this.angleSpeed = this.getRandom(0.6,2);
+        this.noHorizontalFlip = true;
 
         this.hasLight = true;
         this.lightColor = 0xffff9999;
         this.lightSize = 250;
         this.lightOffsetX = 15;
+        this.hasKnockback = true;
     }
 
     tick(game, deltaTime){
@@ -42,12 +44,20 @@ class Chest extends CollisionEntity{
 
     onDispose(game){
         game.level.addEntity(new Explosion(this.position.x, this.position.y));
-        for (let i = 0; i < Math.floor(this.getRandom(10,20)); i++) {
-            game.level.addEntity(new BulletPickup(this.position.x, this.position.y+this.getRandom(-55,55), {x: this.getRandom(-5,5),y: -1}).setSourceEntity(this));
+        var numberOfBulletsToDrop = Math.floor(this.getRandom(15,25))-game.level.player.weaponPower*2;
+        if (numberOfBulletsToDrop > 1){
+            for (let i = 0; i < numberOfBulletsToDrop; i++) {
+                game.level.addEntity(new BulletPickup(this.position.x, this.position.y+this.getRandom(-55,55), {x: this.getRandom(-5,5),y: -1}).setSourceEntity(this));
+            }
+        }
+      
+        for (let i = 0; i < Math.floor(this.getRandom(3,game.level.player.weaponPower*4)); i++) {
             game.level.addEntity(new Heart(this.position.x, this.position.y+this.getRandom(-55,55), {x: this.getRandom(-5,5),y: -1}));
         }
-        game.level.addEntity(new Bomb(this.position.x, this.position.y+this.getRandom(-25,25),{x: this.getRandom(-5,5),y: -1}).setHealth(5));
-        game.level.addEntity(new WeaponStrengthPickup(this.position.x, this.position.y+this.getRandom(-25,25),{x: this.getRandom(-5,5),y: -1}));
+
+        
+        if (this.getRandom(0,1) < 0.25) game.level.addEntity(new Bomb(this.position.x, this.position.y+this.getRandom(-25,25),{x: this.getRandom(-5,5),y: -1}).setHealth(5));
+        if (this.getRandom(0,1) < 0.25) game.level.addEntity(new WeaponStrengthPickup(this.position.x, this.position.y+this.getRandom(-25,25),{x: this.getRandom(-5,5),y: -1}));
         game.playExplosion();
     }
 

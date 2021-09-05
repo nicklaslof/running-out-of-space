@@ -15,6 +15,7 @@ class Heart extends CollisionEntity{
         this.lightColor = 0xff0000ff;
         this.lightSize = 40;
         this.lightOffsetX = 4;
+        this.noHorizontalFlip = true;
     }
 
     tick(game, deltaTime){

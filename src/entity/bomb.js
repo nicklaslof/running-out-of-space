@@ -20,6 +20,7 @@ class Bomb extends CollisionEntity{
         this.lightColor = 0xff00a6ff;
         this.lightSize = 80;
         this.lightOffsetX = 4;
+        this.noHorizontalFlip = true;
     }
 
     tick(game, deltaTime){

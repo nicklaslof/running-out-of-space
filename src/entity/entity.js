@@ -83,16 +83,28 @@ class Entity{
     }
 
     render(game){
-        game.gl.flip = this.horizontalFlip;
+        if (!this.noHorizontalFlip){
+            game.gl.flip = this.horizontalFlip;
+        }else{
+            game.gl.flip = false;
+        }
         game.gl.col = this.c;
         game.gl.img(game.texture.glTexture.tex,-this.sizeX/2,-this.sizeY/2,this.sizeX,this.sizeY,this.rotation,this.position.x,this.position.y,1,1, this.u0, this.u1, this.v0, this.v1);
     }
 
-    translate(x,y){
+    translate(x,y,allowedOutsideLevel=false){
         this.position.x += x;
         this.position.y += y;
-        if (x < 0) this.horizontalFlip = true;
-        if (x > 0 && this.horizontalFlip) this.horizontalFlip = false;
+        if (!allowedOutsideLevel){
+            if (this.position.x < 0) this.position.x = 0;
+            if (this.position.x > W) this.position.x = W;
+            if (this.position.y < 0) this.position.y = 0;
+            if (this.position.y > H) this.position.y = H;
+        }
+        if (!this.noHorizontalFlip){
+            if (x < 0) this.horizontalFlip = true;
+            if (x > 0 && this.horizontalFlip) this.horizontalFlip = false;
+        }
     }
 
     hit(game, h,direction){

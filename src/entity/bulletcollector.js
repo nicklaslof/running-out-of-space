@@ -87,6 +87,10 @@ class BulletCollector extends CollisionEntity{
             this.normalize(velocity);
             this.position.x += velocity.x*this.movementSpeed*deltaTime;
             this.position.y += velocity.y*this.movementSpeed*deltaTime;
+            if (this.position.x < 0) this.position.x = 0;
+            if (this.position.x > W) this.position.x = W;
+            if (this.position.y < 0) this.position.y = 0;
+            if (this.position.y > H) this.position.y = H;
         }
 
     }

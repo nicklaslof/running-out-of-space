@@ -10,6 +10,7 @@ class BulletPickup extends CollisionEntity{
         this.angle = 0;
         this.angleSpeed = this.getRandom(1,4);
         this.sourceEntity = null;
+        this.noHorizontalFlip = true;
 
     }
 
@@ -21,9 +22,9 @@ class BulletPickup extends CollisionEntity{
             this.angle += deltaTime * this.angleSpeed;
             var sin = Math.sin(this.angle*10);
     
-            //this.translate(this.direction.x,-sin*this.speed);
-            this.position.x += this.direction.x;
-            this.position.y += -sin*this.speed;
+            this.translate(this.direction.x,-sin*this.speed);
+            //this.position.x += this.direction.x;
+           // this.position.y += -sin*this.speed;
 
             if (this.angle > 0.61){
                 this.done = true;

@@ -9,11 +9,12 @@ class Poision extends CollisionEntity{
         this.lightSize = 250;
         this.lightColor = 0xffff66fe;
         this.lightOffsetX = 8;
-        this.hitTimeout = 0.2;
+        this.hitTimeout = 0;
     }
 
     tick(game, deltaTime){
         super.tick(game,deltaTime);
+        if (this.hitTimeout > 0) this.hitTimeout -= deltaTime;
         if (this.getRandom(0,100)<1) game.level.addEntity(new Particle(this.position.x+this.getRandom(-25,25), this.position.y+this.getRandom(-25,25), {x: this.getRandom(-28,29),y: 1},0xffff66fe,2,false,4));
     }
 
@@ -22,7 +23,11 @@ class Poision extends CollisionEntity{
     }
     collidedWith(game, otherEntity){
         if (otherEntity.type == "p"){
-            otherEntity.hit(game,1,{x:Math.random(-1,1), y: Math.random(-1,1)});
+            if (this.hitTimeout <= 0){
+                otherEntity.hit(game,1,{x:Math.random(-1,1), y: Math.random(-1,1)});
+                this.hitTimeout=2;
+            }
+            
         }
     }
     

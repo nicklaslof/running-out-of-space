@@ -19,7 +19,7 @@ class Bullet extends CollisionEntity{
         if (this.ttl <= 0){
             this.disposed = true;
         }
-        this.translate(this.direction.x*this.speed*deltaTime, this.direction.y*this.speed*deltaTime);
+        this.translate(this.direction.x*this.speed*deltaTime, this.direction.y*this.speed*deltaTime,true);
         super.tick(game,deltaTime);
     }
 

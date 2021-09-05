@@ -37,14 +37,11 @@ class Enemy extends CollisionEntity{
             let playerPos = {x:game.level.player.position.x, y:game.level.player.position.y};
             let direction = this.normalize({x:playerPos.x - this.position.x, y: playerPos.y - this.position.y});
             this.translate(direction.x*this.speed*deltaTime,direction.y*this.speed*deltaTime);
-
-            if(this.getRandom(0,200)<1){
-                game.level.addEntity(new Bullet(this.position.x,this.position.y,direction,2,1,40,14,3,3,400,20).setSourceEntity(this));
+           
+            if(this.getRandom(0,200)< (1*(game.level.player.weaponPower/3))){
+                game.level.addEntity(new Bullet(this.position.x,this.position.y,direction,2,1,40,14,3,3,400,20).setSourceEntity(this)); 
             }
-
         }
-
-
         super.tick(game,deltaTime);
         
     }
@@ -57,7 +54,7 @@ class Enemy extends CollisionEntity{
             
         }
 
-        if (this.getRandom(0,1) < 0.2){
+        if (this.getRandom(0,1) < 0.4){
             game.level.addEntity(new Chest(this.position.x, this.position.y+this.getRandom(-25,25), {x: this.getRandom(-2,2),y: -1}).setHealth(12));
         }
         game.playExplosion();

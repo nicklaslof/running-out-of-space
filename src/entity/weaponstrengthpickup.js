@@ -11,6 +11,7 @@ class WeaponStrengthPickup extends BulletPickup{
         this.lightSize = 80;
         this.lightColor = 0xff00ff00;
         this.type = "wsp";
+        this.noHorizontalFlip = true;
     }
 
 }
