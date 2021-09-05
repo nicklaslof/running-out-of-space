@@ -29,9 +29,9 @@ class Intro extends UI{
         this.entites.push(new Worm(620,this.introInstructionsY));
 
         this.entites.push(new BulletPickup(556, this.introInstructionsY+44));
-        this.entites.push(new Heart(620, this.introInstructionsY+44));
-        this.entites.push(new WeaponStrengthPickup(680, this.introInstructionsY+44));
-        this.entites.push(new BulletCollector(736, this.introInstructionsY+44));
+        this.entites.push(new Heart(580, this.introInstructionsY+44));
+        this.entites.push(new WeaponStrengthPickup(604, this.introInstructionsY+44,null,19,11));
+        this.entites.push(new BulletCollector(634, this.introInstructionsY+44));
 
         this.entites.push(new Bomb(556, this.introInstructionsY+88,null,24,32));
         this.entites.push(new Chest(620, this.introInstructionsY+90));
