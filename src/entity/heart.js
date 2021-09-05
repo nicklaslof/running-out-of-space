@@ -47,6 +47,7 @@ class Heart extends CollisionEntity{
     collidedWith(game, otherEntity){
         if (otherEntity.type == "p"){
             otherEntity.health++;
+            game.level.ui.addTextParticle(this.position.x-20,this.position.y,"Health +1",{x:this.getRandom(-1,1),y:this.getRandom(-1,-5)},"green",14);
             game.playPlayerHealth();
             this.disposed = true;
         }

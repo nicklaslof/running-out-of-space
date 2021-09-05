@@ -9,6 +9,7 @@ import FloorTile2 from "../tile/floortile2.js";
 import UI from "../ui/ui.js";
 import Chest from "../entity/chest.js";
 import Bomb from "../entity/bomb.js";
+import WeaponStrengthPickup from "../entity/weaponstrengthpickup.js";
 
 class Level{
 
@@ -39,7 +40,8 @@ class Level{
           
         }
 
-        this.addEntity(new Bomb(W/2,H/2,{x:0,y:0}).setHealth(5));
+        this.addEntity(new WeaponStrengthPickup((H/2)+50, W/2,{x: this.getRandom(-5,5),y: -1}));
+      //  this.addEntity(new Bomb(W/2,H/2,{x:0,y:0}).setHealth(5));
 
         this.spawnEnemy();
         this.spawnWorm();

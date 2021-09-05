@@ -56,9 +56,11 @@ class BulletPickup extends CollisionEntity{
             if (this.type == "bp"){
                 game.playPickup();
                 otherEntity.bullets++;
+              //  game.level.ui.addTextParticle(this.position.x-20,this.position.y,"Bullets +1",{x:this.getRandom(-1,1),y:this.getRandom(-1,-5)},"white",14);
             }else if (this.type == "wsp"){
                 game.playPickup();
                 otherEntity.weaponPower++;
+                game.level.ui.addTextParticle(this.position.x-20,this.position.y,"Weapon power +1",{x:this.getRandom(-1,1),y:this.getRandom(-1,-5)},"yellow",18);
             }
         }
 

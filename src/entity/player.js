@@ -65,13 +65,14 @@ class Player extends CollisionEntity{
             this.weaponDelay = 0.1;
             game.playShoot();
         }
-        this.bulletCollector.tick(game,deltaTime);
+        if (this.bulletCollector != null) this.bulletCollector.tick(game,deltaTime);
 
         super.tick(game,deltaTime);
     }
     onHit(game,h,direction){
         game.playPlayerHit();
         game.level.addEntity(new Particle(this.position.x, this.position.y+this.getRandom(-25,25), {x: this.getRandom(-2,2),y: -1},0xff0000ff));
+        game.level.ui.addTextParticle(this.position.x-20,this.position.y,"Health -1",{x:this.getRandom(-1,1),y:this.getRandom(-1,-5)},"red",14);
     }
 
     collidedWith(game, otherEntity){
@@ -91,7 +92,7 @@ class Player extends CollisionEntity{
             this.weapon.render(game);
         }
 
-        this.bulletCollector.render(game);
+        if (this.bulletCollector != null) this.bulletCollector.render(game);
     }
 }
 
