@@ -54,7 +54,7 @@ class Enemy extends CollisionEntity{
             
         }
 
-        if (this.getRandom(0,1) < 0.4){
+        if (this.getRandom(0,1) < 0.2){
             game.level.addEntity(new Chest(this.position.x, this.position.y+this.getRandom(-25,25), {x: this.getRandom(-2,2),y: -1}).setHealth(12));
         }
         game.playExplosion();

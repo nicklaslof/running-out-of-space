@@ -4,6 +4,7 @@ import Level from './level/level.js';
 import Input from './input/input.js';
 import Texture from './graphic/texture.js';
 import Intro from './ui/intro.js';
+import GameOverUI from './ui/gameover.js';
 class Game{
     constructor(){
         var canvas = document.getElementById("g");
@@ -35,6 +36,8 @@ class Game{
 
         this.intro = new Intro();
         this.showIntro = true;
+        this.gameOver = false;
+        this.gameOverUI = new GameOverUI();
 
         
     }
@@ -58,6 +61,15 @@ class Game{
             this.gl.cls();
             this.intro.tick(this, deltaTime/1000);
             this.intro.render(this);
+            this.gl.flush();
+            return;
+        }
+
+        if (this.gameOver){
+            this.gl.bkg(0.5,0.3,0.6,1);
+            this.gl.cls();
+            this.gameOverUI.tick(this, deltaTime/1000);
+            this.gameOverUI.render(this);
             this.gl.flush();
             return;
         }

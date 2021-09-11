@@ -34,6 +34,7 @@ class Player extends CollisionEntity{
 
     tick(game, deltaTime){
 
+        if (this.health <1) game.gameOver=true;
         if (this.bullets < 0) this.bullets = 0;
         this.movement.x = game.input.axes.x;
         this.movement.y = game.input.axes.y;
