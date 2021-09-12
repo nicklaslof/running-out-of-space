@@ -2,7 +2,7 @@ import GlTexture from "./gltexture.js";
 
 // This class will copy the pixel from the asset texture into a bigger texture.
 // On this bigger texture other generated textures can be created
-// and in the end only one texture has to be uploaded to the CPU
+// and in the end only one texture has to be uploaded to the GPU
 class Texture{
     constructor(gl) {
         var assetImage = new Image();
@@ -36,7 +36,7 @@ class Texture{
             this.image.src = canvas.toDataURL();
         };
 
-        assetImage.src = "assets/t.png";
+        assetImage.src = "t.png";
         this.glTexture = new GlTexture(gl,this.image);
     }
 }
